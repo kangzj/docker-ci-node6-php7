@@ -1,5 +1,5 @@
 FROM node:6
-MAINTAINER Grzegorz Rajchman <mrliptontea@griego.pl>
+MAINTAINER Aaron Picht <apicht@users.noreply.github.com>
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
@@ -8,10 +8,15 @@ ENV COMPOSER_NO_INTERACTION 1
 # Tell npm to display only warnings and errors
 ENV NPM_CONFIG_LOGLEVEL warn
 
-# Add basic repository
-RUN echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list \
- && echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list \
- && wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add - \
+# Install prerequsites
+RUN apt-get update \
+ && apt-get install -y apt-transport-https lsb-release ca-certificates
+
+# Add repositories
+RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list \
+ && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+ && wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - \
+ && wget -O- https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && apt-get update \
  && apt-get upgrade -y
 
@@ -30,21 +35,22 @@ RUN apt-get install -y \
 # Install Node tools
 RUN npm install -g \
     node-gyp \
-    yarn
+    gulp-cli
+RUN apt-get install -y yarn
 
 # Install PHP 7 and its modules
 RUN apt-get install -y \
-    php7.0 \
-    php7.0-mbstring \
-    php7.0-mcrypt \
-    php7.0-curl \
-    php7.0-json \
-    php7.0-xml \
-    php7.0-zip \
-    php7.0-bz2 \
-    php7.0-sqlite3 \
-    php7.0-mysql \
-    php7.0-gd
+    php7.1 \
+    php7.1-mbstring \
+    php7.1-mcrypt \
+    php7.1-curl \
+    php7.1-json \
+    php7.1-xml \
+    php7.1-zip \
+    php7.1-bz2 \
+    php7.1-sqlite3 \
+    php7.1-mysql \
+    php7.1-gd
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
