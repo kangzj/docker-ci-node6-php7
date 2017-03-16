@@ -40,17 +40,17 @@ RUN apt-get install -y yarn
 
 # Install PHP 7 and its modules
 RUN apt-get install -y \
-    php7.1 \
-    php7.1-mbstring \
-    php7.1-mcrypt \
-    php7.1-curl \
-    php7.1-json \
-    php7.1-xml \
-    php7.1-zip \
-    php7.1-bz2 \
-    php7.1-sqlite3 \
-    php7.1-mysql \
-    php7.1-gd
+    php7.0 \
+    php7.0-mbstring \
+    php7.0-mcrypt \
+    php7.0-curl \
+    php7.0-json \
+    php7.0-xml \
+    php7.0-zip \
+    php7.0-bz2 \
+    php7.0-sqlite3 \
+    php7.0-mysql \
+    php7.0-gd
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
