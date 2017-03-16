@@ -1,4 +1,4 @@
-FROM node:6.9.5
+FROM node:6.10.0
 MAINTAINER Aaron Picht <apicht@users.noreply.github.com>
 
 # Let the container know that there is no tty
