@@ -71,9 +71,12 @@ RUN mkdir /root/tmp_composer
 RUN cd /root/tmp_composer
 RUN wget https://www.adroitcreations.com/build/composer.json
 RUN wget https://www.adroitcreations.com/build/package.json
+RUN wget https://www.adroitcreations.com/build/bower.json
 RUN RET=`composer install`
 RUN echo $RET
 RUN RET=`npm install`
+RUN echo $RET
+RUN RET=`bower install --allow-root`
 RUN echo $RET
 
 # Clean up temporary files
