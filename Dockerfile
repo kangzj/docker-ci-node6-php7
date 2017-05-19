@@ -1,5 +1,5 @@
 FROM node:6.10.0
-MAINTAINER Aaron Picht <apicht@users.noreply.github.com>
+MAINTAINER Jasper Kang <jasper@adroitcreations.com>
 
 # Let the container know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
@@ -72,12 +72,9 @@ RUN cd /root/tmp_composer
 RUN wget https://www.adroitcreations.com/build/composer.json
 RUN wget https://www.adroitcreations.com/build/package.json
 RUN wget https://www.adroitcreations.com/build/bower.json
-RUN RET=`composer install`
-RUN echo $RET
-RUN RET=`npm install`
-RUN echo $RET
-RUN RET=`bower install --allow-root`
-RUN echo $RET
+RUN composer install || true
+RUN npm install || true
+RUN bower install --allow-root || true
 
 # Clean up temporary files
 RUN apt-get clean && apt-get autoclean && apt-get --purge -y autoremove && \
