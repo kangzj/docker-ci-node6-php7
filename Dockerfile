@@ -71,8 +71,10 @@ RUN mkdir /root/tmp_composer
 RUN cd /root/tmp_composer
 RUN wget https://www.adroitcreations.com/build/composer.json
 RUN wget https://www.adroitcreations.com/build/package.json
-RUN composer install
-RUN npm install
+RUN RET=`composer install`
+RUN echo $RET
+RUN RET=`npm install`
+RUN echo $RET
 
 # Clean up temporary files
 RUN apt-get clean && apt-get autoclean && apt-get --purge -y autoremove && \
