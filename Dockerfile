@@ -69,11 +69,11 @@ RUN pip install awscli --ignore-installed six
 
 RUN mkdir /root/tmp_composer
 RUN cd /root/tmp_composer
-RUN wget https://www.adroitcreations.com/build/composer.json
-RUN wget https://www.adroitcreations.com/build/package.json
+#RUN wget https://www.adroitcreations.com/build/composer.json
+#RUN wget https://www.adroitcreations.com/build/package.json
 RUN wget https://www.adroitcreations.com/build/bower.json
-RUN composer install || true
-RUN npm install || true
+#RUN composer install || true
+#RUN npm install || true
 RUN bower install --allow-root || true
 
 # Clean up temporary files
