@@ -54,7 +54,12 @@ RUN apt-get install -y \
     php7.1-sqlite3 \
     php7.1-mysql \
     php7.1-gd \
-    php7.1-soap
+    php7.1-soap \
+    php7.1-bcmath \
+    php7.1-ldap \
+    php7.1-mcrypt \
+    php7.1-readline \
+    php7.1-xmlrpc
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
