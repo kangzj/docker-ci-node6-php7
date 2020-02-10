@@ -83,8 +83,7 @@ RUN wget https://www.adroitcreations.com/build/bower.json
 RUN bower install --allow-root || true
 
 # Clean up temporary files
-RUN apt-get clean && apt-get autoclean && apt-get --purge -y autoremove && \
-    npm cache clean && \
+RUN apt-get clean || apt-get autoclean && apt-get --purge -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Show versions
