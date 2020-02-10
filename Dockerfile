@@ -92,3 +92,4 @@ RUN node -v
 RUN npm -v
 RUN php -v
 RUN composer -V
+RUN gulp -v
