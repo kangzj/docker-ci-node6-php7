@@ -1,4 +1,4 @@
-FROM node:8.10.0
+FROM node:10.19.0
 MAINTAINER Jasper Kang <jasper@adroitcreations.com>
 
 # Let the container know that there is no tty
