@@ -43,23 +43,21 @@ RUN apt-get install -y yarn
 
 # Install PHP 7 and its modules
 RUN apt-get install -y \
-    php7.1 \
-    php7.1-mbstring \
-    php7.1-mcrypt \
-    php7.1-curl \
-    php7.1-json \
-    php7.1-xml \
-    php7.1-zip \
-    php7.1-bz2 \
-    php7.1-sqlite3 \
-    php7.1-mysql \
-    php7.1-gd \
-    php7.1-soap \
-    php7.1-bcmath \
-    php7.1-ldap \
-    php7.1-mcrypt \
-    php7.1-readline \
-    php7.1-xmlrpc
+    php7.4 \
+    php7.4-mbstring \
+    php7.4-curl \
+    php7.4-json \
+    php7.4-xml \
+    php7.4-zip \
+    php7.4-bz2 \
+    php7.4-sqlite3 \
+    php7.4-mysql \
+    php7.4-gd \
+    php7.4-soap \
+    php7.4-bcmath \
+    php7.4-ldap \
+    php7.4-readline \
+    php7.4-xmlrpc
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -73,18 +71,26 @@ RUN python get-pip.py
 # Install AWS CLI
 RUN pip install awscli --ignore-installed six
 
-RUN mkdir /root/tmp_composer
-RUN cd /root/tmp_composer
+#RUN mkdir /root/tmp_composer
+#RUN cd /root/tmp_composer
 #RUN wget https://www.adroitcreations.com/build/composer.json
 #RUN wget https://www.adroitcreations.com/build/package.json
-RUN wget https://www.adroitcreations.com/build/bower.json
+#RUN wget https://www.adroitcreations.com/build/bower.json
 #RUN composer install || true
 #RUN npm install || true
-RUN bower install --allow-root || true
+#RUN bower install --allow-root || true
 
 # Clean up temporary files
 RUN apt-get clean || apt-get autoclean && apt-get --purge -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN mkdir -p /root/.ssh
+RUN chmod 700 /root/.ssh
+ADD id_rsa.private /root/.ssh/id_rsa
+ADD id_rsa.private.pub /root/.ssh/id_rsa.pub
+RUN chmod 600 /root/.ssh/id_rsa
+RUN echo '' >> /etc/ssh/ssh_config
+RUN echo 'StrictHostKeyChecking no' >> /etc/ssh/ssh_config
 
 # Show versions
 RUN node -v
