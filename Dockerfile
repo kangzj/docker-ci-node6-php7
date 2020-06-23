@@ -84,11 +84,6 @@ RUN pip install awscli --ignore-installed six
 RUN apt-get clean || apt-get autoclean && apt-get --purge -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /root/.ssh
-RUN chmod 700 /root/.ssh
-ADD id_rsa.private /root/.ssh/id_rsa
-ADD id_rsa.private.pub /root/.ssh/id_rsa.pub
-RUN chmod 600 /root/.ssh/id_rsa
 RUN echo '' >> /etc/ssh/ssh_config
 RUN echo 'StrictHostKeyChecking no' >> /etc/ssh/ssh_config
 
